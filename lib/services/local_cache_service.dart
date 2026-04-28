@@ -5,6 +5,8 @@ import 'package:path_provider/path_provider.dart';
 import '../models/user_profile.dart';
 
 class LocalCacheService {
+  static const String cacheFileName = 'user_profiles.json';
+
   Future<File> _localFile() async {
     final directory = await getApplicationDocumentsDirectory();
     return File('${directory.path}/$cacheFileName');
