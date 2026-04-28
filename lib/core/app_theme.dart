@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  static final Color primary = const Color(0xFF003366);
-  static final Color accent = const Color(0xFF00A8E8);
+  static const Color primary = Color(0xFF003366);
+  static const Color accent = Color(0xFF00A8E8);
 
   static ThemeData get lightTheme {
     return ThemeData(
       primaryColor: primary,
       colorScheme: ColorScheme.fromSeed(seedColor: primary),
       scaffoldBackgroundColor: Colors.white,
-      appBarTheme: AppBarTheme(
+      appBarTheme: const AppBarTheme(
         backgroundColor: primary,
         foregroundColor: Colors.white,
       ),

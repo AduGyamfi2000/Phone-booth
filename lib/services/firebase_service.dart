@@ -21,16 +21,25 @@ class FirebaseService {
   }
 
   Future<UserProfile?> fetchUserProfile(String uid) async {
-    final snapshot = await firestore.collection(userCollection).doc(uid).get();
-    if (!snapshot.exists) return null;
-    return UserProfile.fromDocument(snapshot);
+    try {
+      final snapshot = await firestore.collection(userCollection).doc(uid).get();
+      if (!snapshot.exists) return null;
+      return UserProfile.fromDocument(snapshot);
+    } catch (e) {
+      // If document doesn't exist or permission denied, return null
+      if (e.toString().contains('admin-restricted-operation') ||
+          e.toString().contains('permission-denied')) {
+        return null;
+      }
+      rethrow;
+    }
   }
 
   Future<List<UserProfile>> searchNearbyProfiles(
     double latitude,
     double longitude,
   ) async {
-    final geoDelta = 0.2;
+    const geoDelta = 0.2;
     final minLat = latitude - geoDelta;
     final maxLat = latitude + geoDelta;
 
