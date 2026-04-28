@@ -33,8 +33,6 @@ class FirebaseService {
     final geoDelta = 0.2;
     final minLat = latitude - geoDelta;
     final maxLat = latitude + geoDelta;
-    final minLng = longitude - geoDelta;
-    final maxLng = longitude + geoDelta;
 
     final query = await firestore.collection(userCollection)
         .where('location.latitude', isGreaterThanOrEqualTo: minLat)
